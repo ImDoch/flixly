@@ -5,7 +5,7 @@ import { CustomNavbar } from "./CustomNavbar";
 
 export const CustomHeader = () => {
   return (
-    <header className="h-16 px-2 py-1 flex justify-between items-center border-b border-b-red-400">
+    <header className="h-16 px-2 py-1 m-auto flex justify-between items-center border-b border-red-400">
       <h1 className="text-2xl text-red-500">FlixLy</h1>
 
       <CustomNavbar visible={false} />
