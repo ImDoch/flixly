@@ -1,24 +1,22 @@
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import { Search } from "lucide-react";
+import { CustomNavbar } from "./CustomNavbar";
 
 export const CustomHeader = () => {
   return (
-    <header className="h-16 p-2 flex justify-between items-center border-b border-gray-300">
-      <h1 className="text-2xl ">Flixly</h1>
-      <Tabs
-        defaultValue="account"
-        className="w-100 flex justify-center items-center"
-      >
-        <TabsList className="bg-muted">
-          <TabsTrigger value="account">Account</TabsTrigger>
-          <TabsTrigger value="password">Password</TabsTrigger>
-        </TabsList>
-      </Tabs>
+    <header className="h-16 px-2 py-1 flex justify-between items-center border-b border-b-red-400">
+      <h1 className="text-2xl text-red-500">FlixLy</h1>
+
+      <CustomNavbar visible={false} />
 
       <div>
-        <Button variant="outline" size="icon" className="rounded-full">
-          <Search />
+        <Button
+          variant="outline"
+          size="icon"
+          className="rounded-full border-red-400"
+        >
+          <Search className="text-red-500" />
         </Button>
       </div>
     </header>

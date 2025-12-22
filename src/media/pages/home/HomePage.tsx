@@ -1,9 +1,9 @@
-import { CustomHeader } from "../../components/CustomHeader";
+import { CustomNavbar } from "@/media/components/CustomNavbar";
 
 export const HomePage = () => {
   return (
-    <>
-      <CustomHeader />
-    </>
+    <div className="flex justify-center">
+      <CustomNavbar visible={true} />
+    </div>
   );
 };
