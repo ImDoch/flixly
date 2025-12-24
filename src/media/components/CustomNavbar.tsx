@@ -27,6 +27,7 @@ export const CustomNavbar = ({ visible }: Props) => {
                 seletedItem === "movies" ? "bg-slate-800" : "bg-slate-950"
               )}
               onClick={() => setSeletedItem("movies")}
+              asChild
             >
               <Link to="/">Movies</Link>
             </NavigationMenuLink>
@@ -38,6 +39,7 @@ export const CustomNavbar = ({ visible }: Props) => {
                 seletedItem === "series" ? "bg-slate-800" : "bg-slate-950"
               )}
               onClick={() => setSeletedItem("series")}
+              asChild
             >
               <Link to="/">Series</Link>
             </NavigationMenuLink>
