@@ -12,9 +12,7 @@ export const CustomImagesCarousel = () => {
     <div className="w-full flex justify-center items-center">
       <Carousel
         className="w-full
-    max-w-xs
-    md:max-w-xl
-    lg:max-w-3xl
+    max-w-11/12
     "
       >
         <CarouselContent>
@@ -22,7 +20,7 @@ export const CustomImagesCarousel = () => {
             <CarouselItem key={index}>
               <div className="p-1 flex justify-center items-center">
                 <Card className="w-full relative">
-                  <CardContent className="flex aspect-video items-center justify-center p-6">
+                  <CardContent className="flex h-[70vh] lg:h-[75vh] items-center justify-center p-6">
                     <span className="text-4xl font-semibold">{index + 1}</span>
                   </CardContent>
                 </Card>
