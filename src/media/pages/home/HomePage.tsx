@@ -11,14 +11,20 @@ import { CustomNavbar } from "@/media/components/CustomNavbar";
 export const HomePage = () => {
   return (
     <div className=" p-3 flex flex-col items-center justify-center">
-      <div>
-        <Carousel className="w-full max-w-xs relative">
+      <div className="w-full flex justify-center items-center">
+        <Carousel
+          className="w-full
+    max-w-xs
+    md:max-w-xl
+    lg:max-w-3xl
+    "
+        >
           <CarouselContent>
             {Array.from({ length: 5 }).map((_, index) => (
               <CarouselItem key={index}>
-                <div className="p-1">
-                  <Card>
-                    <CardContent className="flex aspect-square items-center justify-center p-6 w-80 max-w-4xl ">
+                <div className="p-1 flex justify-center items-center">
+                  <Card className="w-full relative">
+                    <CardContent className="flex aspect-video items-center justify-center p-6">
                       <span className="text-4xl font-semibold">
                         {index + 1}
                       </span>
@@ -28,8 +34,18 @@ export const HomePage = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className=" top-2/4" />
-          <CarouselNext className=" top-2/4" />
+          <CarouselPrevious
+            className="absolute
+              left-4
+              top-1/2
+              -translate-y-1/2 hidden md:flex justify-center items-center"
+          />
+          <CarouselNext
+            className="absolute
+              right-4
+              top-1/2
+              -translate-y-1/2 hidden md:flex justify-center items-center"
+          />
         </Carousel>
       </div>
 
