@@ -1,13 +1,13 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from '@/components/ui/card';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel";
+} from '@/components/ui/carousel';
 
-export const CustomImagesCarousel = () => {
+export const HeroCarousel = () => {
   return (
     <div className="w-full flex justify-center items-center">
       <Carousel
