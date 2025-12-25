@@ -6,25 +6,37 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import type { Movie } from '../types/movies.response';
 
-export const HeroCarousel = () => {
+interface Props {
+  media: Movie[];
+}
+
+export const HeroCarousel = ({ media }: Props) => {
   return (
-    <div className="w-full flex justify-center items-center">
-      <Carousel
-        className="w-full
-    max-w-11/12
-    "
-      >
+    <div className="w-full flex justify-center items-center max-w-11/12">
+      <Carousel className="w-full">
         <CarouselContent>
-          {Array.from({ length: 5 }).map((_, index) => (
-            <CarouselItem key={index}>
-              <div className="p-1 flex justify-center items-center">
-                <Card className="w-full relative">
-                  <CardContent className="flex h-[70vh] lg:h-[75vh] items-center justify-center p-6">
-                    <span className="text-4xl font-semibold">{index + 1}</span>
-                  </CardContent>
-                </Card>
-              </div>
+          {media.map((item) => (
+            <CarouselItem key={item.id}>
+              <Card className="w-full rounded-lg overflow-hidden border-none">
+                <CardContent className="relative h-[70vh] lg:h-full lg:aspect-video  p-0">
+                  <img
+                    src={item.backdrop_path}
+                    alt={`${item.title} poster`}
+                    className="absolute inset-0 w-full h-full object-cover object-center"
+                  />
+
+                  <div className="relative z-10 h-full flex flex-col justify-end p-6 text-white">
+                    <h2 className="text-2xl lg:text-4xl font-bold">
+                      {item.title}
+                    </h2>
+                    <p className="mt-2 max-w-xl text-sm lg:text-base">
+                      {item.overview.slice(0, 120).trim()}…
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
             </CarouselItem>
           ))}
         </CarouselContent>
