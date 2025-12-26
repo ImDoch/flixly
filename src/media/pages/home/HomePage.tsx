@@ -1,36 +1,29 @@
-import { useQuery } from "@tanstack/react-query";
-import { useSearchParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 
 import { MediaCarousel } from "@/media/components/MediaCarousel";
 import { HeroCarousel } from "@/media/components/HeroCarousel";
 import { CustomNavbar } from "@/media/components/CustomNavbar";
 import { Button } from "@/components/ui/button";
-import { getTrendingMoviesAction } from "@/media/actions/getTrendingMovies.action";
-import { getTrendingSeriesAction } from "@/media/actions/getTrendingSeries.action";
-import { getMoviesCategoriesAction } from "@/media/actions/getMoviesCategories.action";
-import { getSeriesCategoriesAction } from "@/media/actions/getSeriesCategory.action";
+import { useMedia } from "@/media/hooks/useMedia";
+import { useCategory } from "@/media/hooks/useCategory";
+import type { MediaType } from "@/media/types/mediaType.type";
 
 export const HomePage = () => {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
-  const mediaType = searchParams.get("type") ?? "movies";
+  const typeParam = searchParams.get("type");
 
-  const { data: trendingMedia } = useQuery({
-    queryKey: ["trendingMovies", mediaType],
-    queryFn: () =>
-      mediaType === "movies"
-        ? getTrendingMoviesAction()
-        : getTrendingSeriesAction(),
-    staleTime: 1000 * 60 * 5,
-  });
+  const mediaType: MediaType =
+    typeParam === "movies" || typeParam === "series" ? typeParam : "movies";
 
-  const { data: categories } = useQuery({
-    queryKey: ["mediaCategories"],
-    queryFn: () =>
-      mediaType === "movies"
-        ? getMoviesCategoriesAction()
-        : getSeriesCategoriesAction(),
-  });
+  const { data: trendingMedia } = useMedia(mediaType);
+
+  const { data: categories } = useCategory(mediaType);
+
+  const handleShowAll = () => {
+    navigate(`/${mediaType}`);
+  };
 
   return (
     <div className="p-4 flex flex-col items-center justify-center gap-4">
@@ -41,7 +34,9 @@ export const HomePage = () => {
       <MediaCarousel media={trendingMedia} title="Trending" />
       <MediaCarousel mediaCategories={categories} title="Categories" />
 
-      <Button>Show All</Button>
+      <Button className="justify-self-center" onClick={handleShowAll}>
+        Show All
+      </Button>
     </div>
   );
 };

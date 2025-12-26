@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from "react-router";
+import { Link, useLocation, useSearchParams } from "react-router";
 
 import {
   NavigationMenu,
@@ -14,8 +14,16 @@ interface Props {
 
 export const CustomNavbar = ({ visible }: Props) => {
   const [searchParams] = useSearchParams();
+  const location = useLocation();
 
-  const mediaType = searchParams.get("type") ?? "movies";
+  const pathname = location.pathname;
+
+  const mediaType =
+    pathname === "/movies"
+      ? "movies"
+      : pathname === "/series"
+      ? "series"
+      : searchParams.get("type") ?? "movies";
 
   return (
     <div className={`p-2 ${visible ? "lg:hidden" : "hidden lg:block"}`}>
