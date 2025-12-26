@@ -1,14 +1,15 @@
-import { mediaApi } from '../api/mediaApi';
-import type { MediaBase, MoviesResponse } from '../types/media.response';
+import { mediaApi } from "../api/mediaApi";
+import type { MediaBase } from "../types/media.interface";
+import type { MoviesResponse } from "../types/media.response";
 
 export const getTrendingMoviesAction = async (): Promise<MediaBase[]> => {
-  const { data } = await mediaApi.get<MoviesResponse>('/trending/movie/day');
+  const { data } = await mediaApi.get<MoviesResponse>("/trending/movie/day");
 
   const moviesWithImages = data.results.map((movie) => ({
     id: movie.id,
     title: movie.title,
     overview: movie.overview,
-    media_type: 'movie' as const,
+    media_type: "movie" as const,
     original_language: movie.original_language,
     genre_ids: movie.genre_ids,
     popularity: movie.popularity,

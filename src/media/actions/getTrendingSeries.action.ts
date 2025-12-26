@@ -1,8 +1,9 @@
-import { mediaApi } from '../api/mediaApi';
-import type { MediaBase, TvResponse } from '../types/media.response';
+import { mediaApi } from "../api/mediaApi";
+import type { MediaBase } from "../types/media.interface";
+import type { TvResponse } from "../types/media.response";
 
 export const getTrendingSeriesAction = async (): Promise<MediaBase[]> => {
-  const { data } = await mediaApi.get<TvResponse>('/trending/tv/day');
+  const { data } = await mediaApi.get<TvResponse>("/trending/tv/day");
 
   const seriesWithImages = data.results.map((serie) => ({
     id: serie.id,
@@ -10,7 +11,7 @@ export const getTrendingSeriesAction = async (): Promise<MediaBase[]> => {
     overview: serie.overview,
     poster_path: `https://image.tmdb.org/t/p/w342/${serie.poster_path}`,
     backdrop_path: `https://image.tmdb.org/t/p/w1280/${serie.backdrop_path}`,
-    media_type: 'tv' as const,
+    media_type: "tv" as const,
     original_language: serie.original_language,
     genre_ids: serie.genre_ids,
     popularity: serie.popularity,

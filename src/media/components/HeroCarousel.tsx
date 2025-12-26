@@ -1,20 +1,20 @@
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@/components/ui/carousel';
-import type { Movie } from '../types/media.response';
+} from "@/components/ui/carousel";
+import type { MediaBase } from "../types/media.interface";
 
 interface Props {
-  media: Movie[];
+  media: MediaBase[];
 }
 
 export const HeroCarousel = ({ media }: Props) => {
   return (
-    <div className="w-full flex justify-center items-center max-w-11/12">
+    <div className="w-full flex justify-center items-center">
       <Carousel className="w-full">
         <CarouselContent>
           {media.map((item) => (
@@ -33,8 +33,8 @@ export const HeroCarousel = ({ media }: Props) => {
                     <h2 className="text-2xl lg:text-4xl font-bold">
                       {item.title}
                     </h2>
-                    <p className="mt-2 max-w-xl text-sm lg:text-base">
-                      {item.overview.slice(0, 120).trim()}…
+                    <p className="mt-2 max-w-xl text-sm lg:text-base line-clamp-2">
+                      {item.overview}
                     </p>
                   </div>
                 </CardContent>

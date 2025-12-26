@@ -12,21 +12,6 @@ export interface TvResponse {
   total_results: number;
 }
 
-export interface MediaBase {
-  id: number;
-  title: string;
-  overview: string;
-  poster_path: string;
-  backdrop_path: string;
-  media_type: 'movie' | 'tv';
-  original_language: string;
-  genre_ids: number[];
-  popularity: number;
-  vote_average: number;
-  vote_count: number;
-  release_date: string;
-}
-
 export interface MovieDTO {
   adult: boolean;
   backdrop_path: string;
@@ -35,7 +20,7 @@ export interface MovieDTO {
   original_title: string;
   overview: string;
   poster_path: string;
-  media_type: 'movie';
+  media_type: "movie";
   original_language: string;
   genre_ids: number[];
   popularity: number;
@@ -53,7 +38,7 @@ export interface TvDTO {
   original_name: string;
   overview: string;
   poster_path: string;
-  media_type: 'tv';
+  media_type: "tv";
   original_language: string;
   genre_ids: number[];
   popularity: number;
