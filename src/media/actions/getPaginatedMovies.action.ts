@@ -1,9 +1,16 @@
 import { mediaApi } from "../api/mediaApi";
 import type { MediaBase } from "../types/media.interface";
 import type { MoviesResponse } from "../types/media.response";
+import type { PaginatedResponse } from "../types/paginatedResponse.interface";
 
-export const getPaginatedMoviesAction = async (): Promise<MediaBase[]> => {
-  const { data } = await mediaApi.get<MoviesResponse>("/discover/movie");
+export const getPaginatedMoviesAction = async (
+  page: number
+): Promise<PaginatedResponse<MediaBase>> => {
+  const { data } = await mediaApi.get<MoviesResponse>("/discover/movie", {
+    params: {
+      page,
+    },
+  });
 
   const moviesWithImages = data.results.map((movie) => ({
     id: movie.id,
@@ -20,5 +27,8 @@ export const getPaginatedMoviesAction = async (): Promise<MediaBase[]> => {
     backdrop_path: `https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}`,
   }));
 
-  return moviesWithImages;
+  return {
+    ...data,
+    results: moviesWithImages,
+  };
 };

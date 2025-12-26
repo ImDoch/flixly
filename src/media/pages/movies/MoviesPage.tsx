@@ -1,16 +1,21 @@
 import { getPaginatedMoviesAction } from "@/media/actions/getPaginatedMovies.action";
+import { CustomPagination } from "@/media/components/CustomPagination";
 import { MediaCarousel } from "@/media/components/MediaCarousel";
 import { MediaGrid } from "@/media/components/MediaGrid";
 import { useCategory } from "@/media/hooks/useCategory";
 import type { MediaType } from "@/media/types/mediaType.type";
 import { useQuery } from "@tanstack/react-query";
-import { useLocation } from "react-router";
+import { useLocation, useSearchParams } from "react-router";
 
 export const MoviesPage = () => {
   const location = useLocation();
-  const { data: movies } = useQuery({
-    queryKey: ["movies"],
-    queryFn: getPaginatedMoviesAction,
+  const [searchParams] = useSearchParams();
+
+  const page = searchParams.get("page") ?? "1";
+
+  const { data: moviesResponse } = useQuery({
+    queryKey: ["movies", { page }],
+    queryFn: () => getPaginatedMoviesAction(+page),
   });
 
   const pathname = location.pathname;
@@ -26,7 +31,11 @@ export const MoviesPage = () => {
 
       <MediaCarousel title="Categories" mediaCategories={categories} />
 
-      <MediaGrid media={movies || []} />
+      <MediaGrid media={moviesResponse?.results || []} />
+
+      <div className="flex justify-center items-center">
+        <CustomPagination totalPages={moviesResponse?.total_pages || 1} />
+      </div>
     </div>
   );
 };
