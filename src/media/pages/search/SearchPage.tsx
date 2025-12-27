@@ -17,7 +17,6 @@ export const SearchPage = () => {
     staleTime: 1000 * 60 * 5,
   });
   const hasResults = !!movies?.results.length;
-  const totalPages = hasResults ? 10 : 0;
 
   return (
     <main>
@@ -45,7 +44,7 @@ export const SearchPage = () => {
         {hasResults ? (
           <>
             <MediaGrid media={movies!.results} />
-            <CustomPagination totalPages={totalPages} />
+            <CustomPagination totalPages={movies.total_pages} />
           </>
         ) : (
           <EmptyState hasQuery={!!query} query={query} />

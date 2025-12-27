@@ -26,6 +26,9 @@ export const CustomPagination = ({ totalPages }: Props) => {
     (p) => p >= 1 && p <= totalPages
   );
 
+  const showEllipsis =
+    totalPages > pages.length && pages[pages.length - 1] < totalPages;
+
   const handlePageChange = (page: number) => {
     if (page < 1 || page > totalPages) return;
 
@@ -55,9 +58,11 @@ export const CustomPagination = ({ totalPages }: Props) => {
             </PaginationLink>
           </PaginationItem>
         ))}
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
+        {showEllipsis && (
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+        )}
         <PaginationItem>
           <PaginationNext
             aria-disabled={page === totalPages}
