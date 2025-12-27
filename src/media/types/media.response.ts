@@ -20,7 +20,7 @@ export interface MovieDTO {
   original_title: string;
   overview: string;
   poster_path: string;
-  media_type: "movie";
+  media_type: 'movie';
   original_language: string;
   genre_ids: number[];
   popularity: number;
@@ -38,11 +38,18 @@ export interface TvDTO {
   original_name: string;
   overview: string;
   poster_path: string;
-  media_type: "tv";
+  media_type: 'tv';
   original_language: string;
   genre_ids: number[];
   popularity: number;
   first_air_date: string;
   vote_average: number;
   vote_count: number;
+}
+
+export interface MultiSearchResponse {
+  page: number;
+  results: Array<MovieDTO | TvDTO>;
+  total_pages: number;
+  total_results: number;
 }

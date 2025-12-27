@@ -1,12 +1,12 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from '@/components/ui/card';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel";
-import type { MediaBase } from "../types/media.interface";
+} from '@/components/ui/carousel';
+import type { MediaBase } from '../types/media.interface';
 
 interface Props {
   media: MediaBase[];
@@ -15,12 +15,17 @@ interface Props {
 export const HeroCarousel = ({ media }: Props) => {
   return (
     <div className="w-full flex justify-center items-center">
-      <Carousel className="w-full">
+      <Carousel
+        className="w-full"
+        opts={{
+          loop: true,
+        }}
+      >
         <CarouselContent>
           {media.map((item) => (
             <CarouselItem key={item.id}>
               <Card className="w-full rounded-lg overflow-hidden border-none">
-                <CardContent className="relative h-[70vh] lg:h-full lg:aspect-video p-0">
+                <CardContent className="relative h-[70vh] lg:h-auto lg:max-h-[87vh] lg:aspect-video p-0">
                   <img
                     src={item.backdrop_path}
                     alt={`${item.title} poster`}

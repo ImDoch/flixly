@@ -6,8 +6,9 @@ import {
   PaginationLink,
   PaginationEllipsis,
   PaginationNext,
-} from "@/components/ui/pagination";
-import { useSearchParams } from "react-router";
+} from '@/components/ui/pagination';
+import { useEffect } from 'react';
+import { useSearchParams } from 'react-router';
 
 interface Props {
   totalPages: number;
@@ -16,7 +17,7 @@ interface Props {
 export const CustomPagination = ({ totalPages }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const queryPage = searchParams.get("page") ?? "1";
+  const queryPage = searchParams.get('page') ?? '1';
 
   const page = isNaN(+queryPage) ? 1 : +queryPage;
 
@@ -29,10 +30,14 @@ export const CustomPagination = ({ totalPages }: Props) => {
     if (page < 1 || page > totalPages) return;
 
     setSearchParams((prev) => {
-      prev.set("page", page.toString());
+      prev.set('page', page.toString());
       return prev;
     });
   };
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [page]);
 
   return (
     <Pagination>
