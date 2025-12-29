@@ -9,14 +9,21 @@ import {
 import type { MediaBase } from "../types/mediaBase.interface";
 import type { Category } from "../types/categories.response";
 import { useNavigate } from "react-router";
+import type { MediaType } from "../types/mediaType.type";
 
 interface Props {
   title: string;
   media?: MediaBase[];
   mediaCategories?: Category[];
+  mediaType?: MediaType;
 }
 
-export const MediaCarousel = ({ title, media, mediaCategories }: Props) => {
+export const MediaCarousel = ({
+  title,
+  media,
+  mediaCategories,
+  mediaType,
+}: Props) => {
   const navigate = useNavigate();
 
   const handleMediaClick = (item: MediaBase) => {
@@ -26,8 +33,15 @@ export const MediaCarousel = ({ title, media, mediaCategories }: Props) => {
   };
 
   const handleCategoryClick = (categoryId: number) => {
-    navigate(`/category/${categoryId}`);
+    if (!mediaType) return;
+
+    navigate(
+      mediaType === "movies"
+        ? `/movies/category/${categoryId}`
+        : `/series/category/${categoryId}`
+    );
   };
+
   return (
     <div className="w-full">
       <h2 className="ml-6 text-2xl font-bold">{title}</h2>

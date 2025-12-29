@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getMoviesCategoriesAction } from "../actions/getMoviesCategories.action";
-import { getSeriesCategoriesAction } from "../actions/getSeriesCategory.action";
+import { getSeriesCategoriesAction } from "../actions/getSeriesCategories.action";
 
 export const useCategory = (mediaType: "movies" | "series") => {
   return useQuery({

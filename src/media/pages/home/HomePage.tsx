@@ -32,7 +32,11 @@ export const HomePage = () => {
       <CustomNavbar visible={true} />
 
       <MediaCarousel media={trendingMedia} title="Trending" />
-      <MediaCarousel mediaCategories={categories} title="Categories" />
+      <MediaCarousel
+        mediaCategories={categories}
+        title="Categories"
+        mediaType={mediaType === "movies" ? "movies" : "series"}
+      />
 
       <Button className="justify-self-center" onClick={handleShowAll}>
         Show All

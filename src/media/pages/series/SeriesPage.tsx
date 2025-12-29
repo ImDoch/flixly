@@ -29,7 +29,11 @@ export const SeriesPage = () => {
     <div className="p-4 space-y-4">
       <h2 className="text-3xl font-bold text-center">Series</h2>
 
-      <MediaCarousel title="Categories" mediaCategories={categories} />
+      <MediaCarousel
+        title="Categories"
+        mediaCategories={categories}
+        mediaType="series"
+      />
 
       <MediaGrid media={moviesResponse?.results || []} />
 

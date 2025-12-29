@@ -1,12 +1,12 @@
-import { Link, useLocation, useSearchParams } from 'react-router';
+import { Link, useLocation, useSearchParams } from "react-router";
 
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
-} from '@/components/ui/navigation-menu';
-import { NavigationMenuLink } from '@radix-ui/react-navigation-menu';
-import { cn } from '@/lib/utils';
+} from "@/components/ui/navigation-menu";
+import { NavigationMenuLink } from "@radix-ui/react-navigation-menu";
+import { cn } from "@/lib/utils";
 
 interface Props {
   visible: boolean;
@@ -19,25 +19,25 @@ export const CustomNavbar = ({ visible }: Props) => {
   const pathname = location.pathname;
 
   const mediaType =
-    pathname === '/'
-      ? (searchParams.get('type') as 'movies' | 'series') ?? 'movies'
-      : pathname === '/movies'
-      ? 'movies'
-      : pathname === '/series'
-      ? 'series'
-      : pathname === '/search'
+    pathname === "/"
+      ? (searchParams.get("type") as "movies" | "series") ?? "movies"
+      : pathname.includes("/movies")
+      ? "movies"
+      : pathname.includes("/series")
+      ? "series"
+      : pathname === "/search"
       ? null
       : null;
 
   return (
-    <div className={`p-2 ${visible ? 'lg:hidden' : 'hidden lg:block'}`}>
+    <div className={`p-2 ${visible ? "lg:hidden" : "hidden lg:block"}`}>
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuLink
               className={cn(
-                'flex justify-center items-center w-32 py-2 rounded-md cursor-pointer',
-                mediaType === 'movies' ? 'bg-slate-800' : 'bg-slate-950'
+                "flex justify-center items-center w-32 py-2 rounded-md cursor-pointer",
+                mediaType === "movies" ? "bg-slate-800" : "bg-slate-950"
               )}
               asChild
             >
@@ -49,8 +49,8 @@ export const CustomNavbar = ({ visible }: Props) => {
           <NavigationMenuItem>
             <NavigationMenuLink
               className={cn(
-                'flex justify-center items-center w-32 py-2 rounded-md cursor-pointer',
-                mediaType === 'series' ? 'bg-slate-800' : 'bg-slate-950'
+                "flex justify-center items-center w-32 py-2 rounded-md cursor-pointer",
+                mediaType === "series" ? "bg-slate-800" : "bg-slate-950"
               )}
               asChild
             >
