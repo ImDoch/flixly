@@ -1,13 +1,27 @@
-import { Card, CardContent } from '@/components/ui/card';
-import type { MediaBase } from '../types/media.interface';
+import { Card, CardContent } from "@/components/ui/card";
+import type { MediaBase } from "../types/mediaBase.interface";
+import { useNavigate } from "react-router";
 
 interface Props {
   media: MediaBase;
 }
 
 export const MediaCard = ({ media }: Props) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(
+      media.media_type === "movie"
+        ? `/movies/${media.id}`
+        : `/series/${media.id}`
+    );
+  };
+
   return (
-    <Card className="w-full md:w-45 overflow-hidden cursor-pointer group transition-transform duration-300 hover:scale-105">
+    <Card
+      className="w-full md:w-45 overflow-hidden cursor-pointer group transition-transform duration-300 hover:scale-105"
+      onClick={handleClick}
+    >
       <CardContent className=" relative aspect-2/3 p-0">
         <img
           src={media.poster_path}

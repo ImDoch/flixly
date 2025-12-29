@@ -1,12 +1,12 @@
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@/components/ui/carousel';
-import type { MediaBase } from '../types/media.interface';
+} from "@/components/ui/carousel";
+import type { MediaBase } from "../types/mediaBase.interface";
 
 interface Props {
   media: MediaBase[];

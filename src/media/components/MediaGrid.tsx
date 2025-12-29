@@ -1,5 +1,5 @@
-import type { MediaBase } from '../types/media.interface';
-import { MediaCard } from './MediaCard';
+import type { MediaBase } from "../types/mediaBase.interface";
+import { MediaCard } from "./MediaCard";
 
 interface Props {
   media: MediaBase[];

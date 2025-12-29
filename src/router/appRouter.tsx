@@ -4,6 +4,9 @@ import { MoviesPage } from "../media/pages/movies/MoviesPage";
 import { SeriesPage } from "../media/pages/series/SeriesPage";
 import { HomePage } from "../media/pages/home/HomePage";
 import { SearchPage } from "@/media/pages/search/SearchPage";
+import { MovieDetailsPage } from "@/media/pages/movie-details/MovieDetailsPage";
+import { SerieDetailsPage } from "@/media/pages/serie-details/SerieDetailsPage";
+import { CategoryPage } from "@/media/pages/category/CategoryPage";
 
 export const appRouter = createBrowserRouter([
   {
@@ -15,16 +18,28 @@ export const appRouter = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/movies",
+        path: "movies",
         element: <MoviesPage />,
       },
       {
-        path: "/series",
+        path: "movies/:movieId",
+        element: <MovieDetailsPage />,
+      },
+      {
+        path: "series",
         element: <SeriesPage />,
       },
       {
-        path: "/search",
+        path: "series/:serieId",
+        element: <SerieDetailsPage />,
+      },
+      {
+        path: "search",
         element: <SearchPage />,
+      },
+      {
+        path: "category/:categoryId",
+        element: <CategoryPage />,
       },
     ],
   },

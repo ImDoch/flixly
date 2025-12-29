@@ -1,5 +1,5 @@
 import { mediaApi } from "../api/mediaApi";
-import type { MediaBase } from "../types/media.interface";
+import type { MediaBase } from "../types/mediaBase.interface";
 import type { MoviesResponse } from "../types/media.response";
 
 export const getTrendingMoviesAction = async (): Promise<MediaBase[]> => {

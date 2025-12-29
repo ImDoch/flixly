@@ -1,17 +1,17 @@
-import { mediaApi } from '../api/mediaApi';
-import type { MediaBase } from '../types/media.interface';
-import type { PaginatedResponse } from '../types/paginatedResponse.interface';
+import { mediaApi } from "../api/mediaApi";
+import type { MediaBase } from "../types/mediaBase.interface";
+import type { PaginatedResponse } from "../types/paginatedResponse.interface";
 import type {
   MovieDTO,
   TvDTO,
   MultiSearchResponse,
-} from '../types/media.response';
+} from "../types/media.response";
 
 export const getMediaByQueryAction = async (
   query: string,
   page: number
 ): Promise<PaginatedResponse<MediaBase>> => {
-  const { data } = await mediaApi.get<MultiSearchResponse>('/search/multi', {
+  const { data } = await mediaApi.get<MultiSearchResponse>("/search/multi", {
     params: {
       query,
       page,
@@ -23,15 +23,15 @@ export const getMediaByQueryAction = async (
     // ❌ descartamos people
     .filter(
       (item): item is MovieDTO | TvDTO =>
-        item.media_type === 'movie' || item.media_type === 'tv'
+        item.media_type === "movie" || item.media_type === "tv"
     )
     .map((item) => {
-      if (item.media_type === 'movie') {
+      if (item.media_type === "movie") {
         return {
           id: item.id,
           title: item.title,
           overview: item.overview,
-          media_type: 'movie',
+          media_type: "movie",
           original_language: item.original_language,
           genre_ids: item.genre_ids,
           popularity: item.popularity,
@@ -48,7 +48,7 @@ export const getMediaByQueryAction = async (
         id: item.id,
         title: item.name, // 👈 normalizamos
         overview: item.overview,
-        media_type: 'tv',
+        media_type: "tv",
         original_language: item.original_language,
         genre_ids: item.genre_ids,
         popularity: item.popularity,

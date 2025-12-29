@@ -1,13 +1,14 @@
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@/components/ui/carousel';
-import type { MediaBase } from '../types/media.interface';
-import type { Category } from '../types/categories.response';
+} from "@/components/ui/carousel";
+import type { MediaBase } from "../types/mediaBase.interface";
+import type { Category } from "../types/categories.response";
+import { useNavigate } from "react-router";
 
 interface Props {
   title: string;
@@ -16,6 +17,17 @@ interface Props {
 }
 
 export const MediaCarousel = ({ title, media, mediaCategories }: Props) => {
+  const navigate = useNavigate();
+
+  const handleMediaClick = (item: MediaBase) => {
+    navigate(
+      item.media_type === "movie" ? `/movies/${item.id}` : `/series/${item.id}`
+    );
+  };
+
+  const handleCategoryClick = (categoryId: number) => {
+    navigate(`/category/${categoryId}`);
+  };
   return (
     <div className="w-full">
       <h2 className="ml-6 text-2xl font-bold">{title}</h2>
@@ -35,7 +47,10 @@ export const MediaCarousel = ({ title, media, mediaCategories }: Props) => {
                   className="basis-auto shrink-0 px-3 py-6"
                 >
                   <div className="px-2 py-1 group transition-transform duration-300 hover:scale-105">
-                    <Card className="w-45 overflow-hidden cursor-pointer">
+                    <Card
+                      className="w-45 overflow-hidden cursor-pointer"
+                      onClick={() => handleMediaClick(item)}
+                    >
                       <CardContent className="relative flex aspect-2/3 items-center justify-center p-6">
                         <img
                           src={item.poster_path}
@@ -60,7 +75,10 @@ export const MediaCarousel = ({ title, media, mediaCategories }: Props) => {
                   className="basis-auto shrink-0 py-6"
                 >
                   <div className="px-2 py-1 group transition-transform duration-300 hover:scale-105">
-                    <Card className="w-45 cursor-pointer bg-linear-to-br from-slate-80 via-slate-700 to-slate-600">
+                    <Card
+                      className="w-45 cursor-pointer bg-linear-to-br from-slate-80 via-slate-700 to-slate-600"
+                      onClick={() => handleCategoryClick(item.id)}
+                    >
                       <CardContent className=" flex aspect-2/3 items-center justify-center p-6">
                         <span className="text-2xl font-semibold text-center">
                           {item.name}

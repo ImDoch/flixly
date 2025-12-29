@@ -1,5 +1,5 @@
 import { mediaApi } from "../api/mediaApi";
-import type { MediaBase } from "../types/media.interface";
+import type { MediaBase } from "../types/mediaBase.interface";
 import type { TvResponse } from "../types/media.response";
 import type { PaginatedResponse } from "../types/paginatedResponse.interface";
 
