@@ -4,10 +4,11 @@ import { MoviesPage } from "../media/pages/movies/MoviesPage";
 import { SeriesPage } from "../media/pages/series/SeriesPage";
 import { HomePage } from "../media/pages/home/HomePage";
 import { SearchPage } from "@/media/pages/search/SearchPage";
-import { MovieDetailsPage } from "@/media/pages/movie-details/MovieDetailsPage";
+
 import { SerieDetailsPage } from "@/media/pages/serie-details/SerieDetailsPage";
 import { MoviesCategoryPage } from "@/media/pages/movies-category/MoviesCategoryPage";
 import { SeriesCategoryPage } from "@/media/pages/series-category/SeriesCategoryPage";
+import { MovieDetailsPage } from "@/media/pages/movie-details/MovieDetailsPage";
 
 export const appRouter = createBrowserRouter([
   {
