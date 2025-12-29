@@ -1,13 +1,13 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from '@/components/ui/card';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel";
-import type { MediaBase } from "../types/media.interface";
-import type { Category } from "../types/categories.response";
+} from '@/components/ui/carousel';
+import type { MediaBase } from '../types/media.interface';
+import type { Category } from '../types/categories.response';
 
 interface Props {
   title: string;
@@ -41,6 +41,7 @@ export const MediaCarousel = ({ title, media, mediaCategories }: Props) => {
                           src={item.poster_path}
                           alt={`${item.title} image`}
                           className="absolute inset-0 w-full h-full object-cover object-center mask-[linear-gradient(to_bottom,black_0%,black_40%,transparent_100%)]"
+                          loading="lazy"
                         />
 
                         <h2 className="relative z-10 h-full flex flex-col justify-end items-center text-center text-white text-md font-bold">

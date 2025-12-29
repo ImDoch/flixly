@@ -30,6 +30,7 @@ export const HeroCarousel = ({ media }: Props) => {
                     src={item.backdrop_path}
                     alt={`${item.title} poster`}
                     className="absolute inset-0 w-full h-full object-cover object-center mask-[linear-gradient(to_bottom,black_0%,black_60%,transparent_100%)]"
+                    loading="lazy"
                   />
 
                   <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/30 to-transparent" />

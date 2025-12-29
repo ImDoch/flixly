@@ -13,6 +13,7 @@ export const MediaCard = ({ media }: Props) => {
           src={media.poster_path}
           alt={`${media.title} image`}
           className="absolute inset-0 w-full h-full object-cover object-center mask-[linear-gradient(to_bottom,black_0%,black_40%,transparent_100%)]"
+          loading="lazy"
         />
 
         <h2 className="z-10 absolute bottom-3 left-3 right-3 text-center text-whithe text-sm font-bold line-clamp-2">
