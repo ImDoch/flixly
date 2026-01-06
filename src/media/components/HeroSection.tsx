@@ -1,14 +1,14 @@
 import { Button } from "@/components/ui/button";
-import type { Movie } from "../types/movie.response";
 import { Calendar, Clock, Play, Star } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import type { HeroMedia } from "../types/heroMedia";
 
 interface Props {
-  movie: Movie;
+  media: HeroMedia;
   type: "movie" | "serie";
 }
 
-export const HeroSection = ({ movie, type }: Props) => {
+export const HeroSection = ({ media, type }: Props) => {
   const formatRuntime = (minutes: number) => {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
@@ -23,13 +23,15 @@ export const HeroSection = ({ movie, type }: Props) => {
     });
   };
 
+  if (!media) return <h1>Cargando...</h1>;
+
   return (
     <section className="relative min-h-[80vh] md:min-h-[90vh] w-full overflow-hidden">
       {/* Background */}
-      {movie.backdrop_path && (
+      {media.backdropPath && (
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${movie.backdrop_path})` }}
+          style={{ backgroundImage: `url(${media.backdropPath})` }}
         >
           <div className="absolute inset-0 bg-linear-to-r from-background via-background/95 to-background/60" />
           <div className="absolute inset-0 bg-linear-to-t from-background via-background/50 to-transparent" />
@@ -42,8 +44,8 @@ export const HeroSection = ({ movie, type }: Props) => {
           <div className="w-full max-w-50 xs:max-w-[240px] sm:max-w-70 md:max-w-75 lg:max-w-87.5 mx-auto md:mx-0 shrink-0 animate-fade-in">
             <div className="relative group">
               <img
-                src={movie.poster_path}
-                alt={movie.title}
+                src={media.posterPath}
+                alt={media.title}
                 className="w-full rounded-xl shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]"
               />
               <div className="absolute inset-0 rounded-xl bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -67,11 +69,11 @@ export const HeroSection = ({ movie, type }: Props) => {
                 style={{ animationDelay: "0.1s" }}
               >
                 <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gradient leading-tight">
-                  {movie.title}
+                  {media.title}
                 </h1>
-                {movie.tagline && (
+                {media.tagline && (
                   <p className="text-base sm:text-lg md:text-xl text-muted-foreground italic">
-                    "{movie.tagline}"
+                    "{media.tagline}"
                   </p>
                 )}
               </div>
@@ -83,18 +85,18 @@ export const HeroSection = ({ movie, type }: Props) => {
               >
                 <Badge variant="rating" className="text-sm px-3 py-1">
                   <Star className="w-4 h-4 mr-1 fill-current" />
-                  {movie.vote_average.toFixed(1)}
+                  {media.rating !== undefined ? media.rating.toFixed(1) : "N/A"}
                 </Badge>
 
                 <div className="flex items-center gap-1.5 text-muted-foreground text-sm">
                   <Calendar className="w-4 h-4" />
-                  <span>{new Date(movie.release_date).getFullYear()}</span>
+                  <span>{media.year}</span>
                 </div>
 
-                {movie.runtime && (
+                {media.runtime && (
                   <div className="flex items-center gap-1.5 text-muted-foreground text-sm">
                     <Clock className="w-4 h-4" />
-                    <span>{formatRuntime(movie.runtime)}</span>
+                    <span>{formatRuntime(media.runtime)}</span>
                   </div>
                 )}
 
@@ -111,7 +113,7 @@ export const HeroSection = ({ movie, type }: Props) => {
                 className="flex flex-wrap gap-2 justify-center md:justify-start animate-fade-in"
                 style={{ animationDelay: "0.3s" }}
               >
-                {movie.genres.map((genre) => (
+                {media.genres?.map((genre) => (
                   <Badge key={genre.id} variant="streaming">
                     {genre.name}
                   </Badge>
@@ -123,7 +125,7 @@ export const HeroSection = ({ movie, type }: Props) => {
                 className="text-sm sm:text-base md:text-lg text-foreground/90 leading-relaxed max-w-2xl animate-fade-in"
                 style={{ animationDelay: "0.4s" }}
               >
-                {movie.overview}
+                {media.overview}
               </p>
 
               {/* Release date */}
@@ -137,7 +139,7 @@ export const HeroSection = ({ movie, type }: Props) => {
                       ? "Fecha de estreno:"
                       : "Primera emisión:"}
                   </span>{" "}
-                  {formatDate(movie.release_date)}
+                  {media.fullDate && formatDate(media.fullDate)}
                 </p>
               </div>
             </div>

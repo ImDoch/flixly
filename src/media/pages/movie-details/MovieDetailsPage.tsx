@@ -1,6 +1,6 @@
 import { getMovieDetailsAction } from "@/media/actions/getMovieDetails.action";
 import { HeroSection } from "@/media/components/HeroSection";
-import type { Movie } from "@/media/types/movie.response";
+import { movieToHeroMedia } from "@/media/helpers/movieToHeroMedia";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
 
@@ -12,13 +12,15 @@ export const MovieDetailsPage = () => {
     queryFn: () => getMovieDetailsAction(+movieId!),
   });
 
-  if (isLoading) {
+  if (isLoading || !movie) {
     return <div>Cargando...</div>; // o Skeleton
   }
 
+  const heroMedia = movieToHeroMedia(movie);
+
   return (
     <div>
-      <HeroSection type="movie" movie={movie || ({} as Movie)} />
+      <HeroSection type="movie" media={heroMedia} />
     </div>
   );
 };
