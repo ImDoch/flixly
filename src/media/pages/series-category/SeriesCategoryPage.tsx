@@ -25,7 +25,7 @@ export const SeriesCategoryPage = () => {
 
   return (
     <div className="p-4 space-y-4">
-      <h2 className="text-2xl font-bold text-center">{`Series - Category: ${categoryName}`}</h2>
+      <h2 className="text-2xl font-bold text-center">{`${categoryName} Series`}</h2>
 
       <MediaGrid media={series?.results || []} />
       <CustomPagination totalPages={series?.total_pages || 0} />
