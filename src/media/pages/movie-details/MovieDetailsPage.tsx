@@ -7,14 +7,19 @@ import { useParams } from "react-router";
 export const MovieDetailsPage = () => {
   const { movieId } = useParams();
 
-  const { data: movie, isLoading } = useQuery({
+  const {
+    data: movie,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: [MovieDetailsPage, { movieId }],
     queryFn: () => getMovieDetailsAction(+movieId!),
+    staleTime: 1000 * 60 * 5,
   });
 
-  if (isLoading || !movie) {
-    return <div>Cargando...</div>; // o Skeleton
-  }
+  if (isLoading) return <div>Cargando...</div>;
+
+  if (error || !movie) return <div>Movie dont found</div>;
 
   const heroMedia = movieToHeroMedia(movie);
 

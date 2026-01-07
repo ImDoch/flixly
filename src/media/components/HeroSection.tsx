@@ -16,7 +16,7 @@ export const HeroSection = ({ media, type }: Props) => {
   };
 
   const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString("es-ES", {
+    return new Date(date).toLocaleDateString("en-EN", {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -46,17 +46,8 @@ export const HeroSection = ({ media, type }: Props) => {
               <img
                 src={media.posterPath}
                 alt={media.title}
-                className="w-full rounded-xl shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]"
+                className="w-full rounded-xl shadow-2xl transition-transform duration-500"
               />
-              <div className="absolute inset-0 rounded-xl bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <Button
-                variant="streaming"
-                size="lg"
-                className="absolute bottom-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0"
-              >
-                <Play className="w-5 h-5 mr-2" />
-                Watch now
-              </Button>
             </div>
           </div>
 
@@ -100,12 +91,11 @@ export const HeroSection = ({ media, type }: Props) => {
                   </div>
                 )}
 
-                {/* TODO: Implementar para vista de series */}
-                {/* {type === "serie" && seasons && episodes && (
-                <Badge variant="glass" className="text-sm">
-                  {seasons} Temporadas • {episodes} Episodios
-                </Badge>
-              )} */}
+                {type === "serie" && media.seasons && media.episodes && (
+                  <Badge variant="glass" className="text-sm">
+                    {media.seasons} Seasons • {media.episodes} Episodes
+                  </Badge>
+                )}
               </div>
 
               {/* Genres */}
@@ -135,9 +125,7 @@ export const HeroSection = ({ media, type }: Props) => {
               >
                 <p className="text-sm text-muted-foreground">
                   <span className="font-medium text-foreground">
-                    {type === "movie"
-                      ? "Fecha de estreno:"
-                      : "Primera emisión:"}
+                    {type === "movie" ? "Release Date:" : "First Emision:"}
                   </span>{" "}
                   {media.fullDate && formatDate(media.fullDate)}
                 </p>
